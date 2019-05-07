@@ -113,11 +113,10 @@ FROM
 -- 마지막으로 신입사원이 들어온 날은 언제 입니까? 다음 형식으로 출력해주세요.
 -- 예) 2014년 07월 10일
 SELECT 
-    DATE_FORMAT(hire_date, '%Y년 %c월 %d일') AS '마지막 신입사원 입사'
+    DATE_FORMAT(MAX(hire_date), '%Y년 %c월 %d일') AS '마지막 신입사원 입사'
 FROM
     employees
-ORDER BY hire_date DESC
-LIMIT 0 , 1;
+ORDER BY hire_date DESC;
 -- 문제3.
 -- 가장 오래 근속한 직원의 입사일은 언제인가요? 다음 형식으로 출력해주세요.
 -- 예) 2014년 07월 10일
@@ -128,6 +127,11 @@ FROM
 GROUP BY emp_no
 ORDER BY MAX(to_date) - MIN(from_date) DESC
 LIMIT 0 , 1;
+
+SELECT 
+    DATE_FORMAT(MIN(hire_date), '%Y년 %c월 %d일') AS '가장 오래 근속한 직원의 입사일'
+FROM
+    employees;
 
 -- 문제4.
 -- 현재 이 회사의 평균 연봉은 얼마입니까?
